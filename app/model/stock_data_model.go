@@ -6,43 +6,44 @@ import (
 	"gorm.io/gorm"
 )
 
-type Book struct {
+type StockData struct {
 	gorm.Model
 	Title string
-	Body  string
+	Count int
+	Date string
 }
 
-func GetAll() (books []Book) {
-	result := Db.Find(&books)
+func GetAll() (stock_datas []StockData) {
+	result := Db.Find(&stock_datas)
 	if result.Error != nil {
 		panic(result.Error)
 	}
 	return
 }
 
-func GetOne(id int) (book Book) {
-	result := Db.First(&book, id)
+func GetOne(id int) (stock_data StockData) {
+	result := Db.First(&stock_data, id)
 	if result.Error != nil {
 		panic(result.Error)
 	}
 	return
 }
 
-func (b *Book) Create() {
+func (b *StockData) Create() {
 	result := Db.Create(b)
 	if result.Error != nil {
 		panic(result.Error)
 	}
 }
 
-func (b *Book) Update() {
+func (b *StockData) Update() {
 	result := Db.Save(b)
 	if result.Error != nil {
 		panic(result.Error)
 	}
 }
 
-func (b *Book) Delete() {
+func (b *StockData) Delete() {
 	result := Db.Delete(b)
 	fmt.Println(result)
 	if result.Error != nil {
