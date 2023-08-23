@@ -24,8 +24,20 @@ func GetCreate(c *gin.Context) {
 
 //formから送信された内容をDBに登録せずにそのまま返す
 func PostCreate(c *gin.Context) {
-	title := c.PostForm("title")
-	date := c.PostForm("date")
+	a := c.PostForm("initial_investment")
+	b := c.PostForm("monthly_accumulation")
+	d := c.PostForm("year")
+	e := c.PostForm("rate")
+	f := c.PostForm("exchange_order")
 
-	c.HTML(200, "create.html", gin.H{"title": title, "date": date})
+	var o, p, q, r int
+
+	o, _ = strconv.Atoi(a)
+	p, _ = strconv.Atoi(b)
+	q, _ = strconv.Atoi(d)
+	r, _ = strconv.Atoi(e)
+
+	result := o + p * q * r * 12
+
+	c.HTML(200, "create.html", gin.H{"result": result,"f": f })
 }
