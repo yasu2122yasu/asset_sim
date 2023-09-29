@@ -1,23 +1,24 @@
 package model
 
 import (
+	"database/sql"
 	"fmt"
 	"time"
 
-	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var Db *gorm.DB
 
 func init() {
-	dsn := "host=db port=5432 user=postgres password=postgres dbname=app sslmode=disable"
-	dialector := postgres.Open(dsn)
+	dsn := "port=5432 user=root password=password dbname=asset_sim sslmode=disable"
+
 	var err error
-	if Db, err = gorm.Open(dialector); err != nil {
-		connect(dialector, 100)
-	}
-	fmt.Println("db connected!!")
+	_ , err = sql.Open("mysql", dsn)
+    if err != nil {
+        fmt.Println(err.Error())
+    }
+  fmt.Println("DB接続成功")
 }
 
 func connect(dialector gorm.Dialector, count uint) {
