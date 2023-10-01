@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta httpequiv="ContentType" content="text/html;charset=utf8" />
+    <title>新規作成</title>
+  </head>
+  <body>
+    <form method="POST" action="/create" id="create_form">
+      <p>初期投資額： <input type="number" name="initial_investment" value="{{.string_initial_investment}}" />万円</p>
+      <p>毎月の積立額： <input type="number" name="monthly_amount" value="{{.string_monthly_amount}}" />万円</p>
+      <p>積立年数： <input type="number" name="year" value="{{.string_accumulation_period}}" />年</p>
+      <p>
+        投資対象：
+        <select name="rates">
+          <option value="sp_500">S&P500(米国)</option>
+          <option value="world_stock">全世界株式指数</option>
+          <option value="nikkei225">日経平均株価</option>
+          <option value="us_bond">米国債券</option>
+          <option value="jpn_bond">日本債券</option>
+        </select>
+      </p>
+
+      <!-- <p>
+        為替：
+        <select name="exchange_order">
+          <option value="dollar">ドル</option>
+          <option value="yen">日本円</option>
+        </select>
+      </p> -->
+    </form>
+    <p>
+      <input type="submit" form="create_form" value="作成" />
+      <a href="/"><input type="button" value="戻る" /></a>
+    </p>
+    <p>想定資産額：{{.result}}万円</p>
+    <!-- TODO: 為替による調整を追加したときに実装 -->
+    <!-- <p>想定為替：{{.currency}}</p> -->
+    <p>
+      <a href="/"><input type="button" value="戻る" /></a>
+    </p>
+  </body>
+</html>
