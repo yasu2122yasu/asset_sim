@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"app/model"
 	"fmt"
 	"strconv"
 
@@ -70,9 +71,12 @@ func PostCreate(c *gin.Context) {
 // 	c.HTML(200, "show.html", gin.H{"book": book})
 // }
 
-// func GetCreate(c *gin.Context) {
-// 	c.HTML(200, "create.html", gin.H{})
-// }
+func GetStockData(c *gin.Context) {
+	stock_data := model.GetAllStockData()
+	c.HTML(200, "stock_data.html", gin.H{
+		"stock_data": stock_data,
+	})
+}
 
 // func PostCreate(c *gin.Context) {
 // 	title := c.PostForm("title")
