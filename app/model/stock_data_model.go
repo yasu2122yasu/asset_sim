@@ -14,17 +14,16 @@ type Book struct {
 
 type StockData struct {
 	gorm.Model
-	StockPrice int32
-	Date       string
+	Title string
+	Price int32
 }
 
-func GetAllStockData() []StockData {
-	var stock_datas []StockData
-	result := Db.Find(&stock_datas)
+func GetAllStockData() (stock_data []StockData) {
+	result := Db.Find(&stock_data)
 	if result.Error != nil {
 		panic(result.Error)
 	}
-	return stock_datas
+	return
 }
 
 func GetAll() (books []Book) {
