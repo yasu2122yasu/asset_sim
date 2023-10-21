@@ -65,16 +65,30 @@ func PostCreate(c *gin.Context) {
 	})
 }
 
-// func Show(c *gin.Context) {
-// 	id, _ := strconv.Atoi(c.Param("id"))
-// 	book := model.GetOne(id)
-// 	c.HTML(200, "show.html", gin.H{"book": book})
-// }
+func Show(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	data := model.GetOne(id)
+	c.HTML(200, "show.html", gin.H{"data": data})
+}
 
 func GetStockData(c *gin.Context) {
 	stock_data := model.GetAllStockData()
 	c.HTML(200, "stock_data.html", gin.H{
 		"stock_data": stock_data,
+	})
+}
+
+func GetWorld(c *gin.Context) {
+	world := model.GetAllWorld()
+	c.HTML(200, "world.html", gin.H{
+		"world": world,
+	})
+}
+
+func GetOneWorld(c *gin.Context) {
+	price := model.GetOneStockData()
+	c.HTML(200, "oneworld.html", gin.H{
+		"price": price,
 	})
 }
 

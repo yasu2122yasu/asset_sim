@@ -18,8 +18,32 @@ type StockData struct {
 	Price int32
 }
 
-func GetAllStockData() (stock_data []StockData) {
-	result := Db.Find(&stock_data)
+type World struct {
+	gorm.Model
+	Date      string
+	MsciWorld float64
+}
+
+func GetAllStockData() (stock_datas []StockData) {
+	result := Db.First(&stock_datas)
+	if result.Error != nil {
+		panic(result.Error)
+	}
+	return
+}
+
+func GetOneStockData() (stock_data StockData) {
+	result := Db.Where("price  = ?", 591347.0871464558).Find(&stock_data)
+
+	if result.Error != nil {
+		panic(result.Error)
+	}
+
+	return
+}
+
+func GetAllWorld() (worlds []World) {
+	result := Db.Find(&worlds)
 	if result.Error != nil {
 		panic(result.Error)
 	}
@@ -34,8 +58,8 @@ func GetAll() (books []Book) {
 	return
 }
 
-func GetOne(id int) (book Book) {
-	result := Db.First(&book, id)
+func GetOne(id int) (stock_data StockData) {
+	result := Db.First(&stock_data, id)
 	if result.Error != nil {
 		panic(result.Error)
 	}
