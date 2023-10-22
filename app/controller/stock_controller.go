@@ -87,6 +87,7 @@ func GetWorld(c *gin.Context) {
 
 func GetOneWorld(c *gin.Context) {
 	price := model.GetOneStockData()
+	fmt.Println(price)
 	c.HTML(200, "oneworld.html", gin.H{
 		"price": price,
 	})

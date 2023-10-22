@@ -19,9 +19,9 @@ type StockData struct {
 }
 
 type World struct {
-	gorm.Model
-	Date      string
-	MsciWorld float64
+	ID    int32   `gorm:"primaryKey"`  // 大文字の "ID" に修正
+	Date  string  `gorm:"column:date"` // DBのカラム名を明示的に指定
+	Price float64 `gorm:"column:price"`
 }
 
 func GetAllStockData() (stock_datas []StockData) {
@@ -32,8 +32,9 @@ func GetAllStockData() (stock_datas []StockData) {
 	return
 }
 
-func GetOneStockData() (stock_data StockData) {
-	result := Db.Where("price  = ?", 591347.0871464558).Find(&stock_data)
+func GetOneStockData() (world World) {
+	// stock_dataテーブルにあるPKであるid=2のレコードを取得する。
+	result := Db.First(&world, 2) // 主キーを用いてレコードを検索
 
 	if result.Error != nil {
 		panic(result.Error)
