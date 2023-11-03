@@ -1,0 +1,20 @@
+/* chart-style.cssとして保存する */
+
+.chart-container {
+  width: 600px;
+  margin: auto;
+}
+
+/* Chart.js のデフォルトスタイルをオーバーライドする */
+.canvas-chart {
+  background-color: #ffffff; /* グラフの背景色 */
+  border: 1px solid #d3d3d3; /* グラフの枠線 */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* グラフに影を付ける */
+}
+
+/* レスポンシブデザインを考慮してサイズ指定も可能です */
+@media (max-width: 768px) {
+  .chart-container {
+    width: 100%;
+  }
+}
