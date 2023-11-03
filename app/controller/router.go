@@ -8,6 +8,7 @@ func GetRouter() *gin.Engine {
 	// gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	r.LoadHTMLGlob("view/*html")
+	r.Static("../js", "./js")
 	r.GET("/show/:id", Show)
 	r.GET("/create", GetCreate)
 	r.POST("/create", PostCreate)

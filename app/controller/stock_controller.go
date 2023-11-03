@@ -12,8 +12,8 @@ func GetCreate(c *gin.Context) {
 	c.HTML(200, "create.html", gin.H{})
 }
 
-// formから送信された内容をDBに登録せずにそのまま返す
 func PostCreate(c *gin.Context) {
+	// string_investment_duration_year := c.PostForm("investment_duration_year")
 	string_initial_investment := c.PostForm("initial_investment")
 	string_monthly_amount := c.PostForm("monthly_amount")
 	string_accumulation_period := c.DefaultPostForm("year", "10")
@@ -21,7 +21,7 @@ func PostCreate(c *gin.Context) {
 	// TODO: 為替による調整を追加したときに実装
 	// string_exchange_rate := c.PostForm("exchange_order")
 
-	fmt.Println(string_accumulation_period, string_monthly_amount, string_accumulation_period, string_rate)
+	// 投資開始年度（ex.1970年）から30年度分のレコードを取得できるプログラムを書く
 
 	var float_initial_investment float64
 	var float_monthly_amount float64
@@ -80,54 +80,33 @@ func GetStockData(c *gin.Context) {
 
 func GetWorld(c *gin.Context) {
 	world := model.GetAllWorld()
+
+	var sum float64
+	var totalMoney []int32
+
+	for _, v := range world {
+		r := v.Price
+		// 何株あるかのカウント（oneは保有株数）
+		one := 33333 / r
+
+		sum = sum + one
+
+		totalMoneyFloat := sum * v.Price
+
+		totalMoneyValue := int32(totalMoneyFloat)
+
+		totalMoney = append(totalMoney, totalMoneyValue)
+
+	}
+
 	c.HTML(200, "world.html", gin.H{
-		"world": world,
+		"totalMoney": totalMoney,
 	})
 }
 
 func GetOneWorld(c *gin.Context) {
 	price := model.GetOneStockData()
-	fmt.Println(price)
 	c.HTML(200, "oneworld.html", gin.H{
 		"price": price,
 	})
 }
-
-// func PostCreate(c *gin.Context) {
-// 	title := c.PostForm("title")
-// 	price := c.PostForm("price")
-// 	book := model.Book{Title: title, Price: price}
-// 	book.Create()
-// 	c.Redirect(301, "/")
-// }
-
-// func GetEdit(c *gin.Context) {
-// 	id, _ := strconv.Atoi(c.Param("id"))
-// 	book := model.GetOne(id)
-// 	c.HTML(200, "edit.html", gin.H{"book": book})
-// }
-
-// func PostEdit(c *gin.Context) {
-// 	id, _ := strconv.Atoi(c.PostForm("id"))
-// 	book := model.GetOne(id)
-// 	title := c.PostForm("title")
-// 	book.Title = title
-// 	body := c.PostForm("body")
-// 	book.Body = body
-// 	book.Update()
-// 	c.Redirect(301, "/")
-// }
-
-// func GetDelete(c *gin.Context) {
-// 	id, _ := strconv.Atoi(c.Param("id"))
-// 	book := model.GetOne(id)
-// 	c.HTML(200, "delete.html", gin.H{"book": book})
-// }
-
-// func PostDelete(c *gin.Context) {
-// 	id, _ := strconv.Atoi(c.PostForm("id"))
-// 	fmt.Printf("ここに削除用のidを入れる%d", id)
-// 	book := model.GetOne(id)
-// 	book.Delete()
-// 	c.Redirect(301, "/")
-// }

@@ -4,19 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="chart-style.css" />
+    <!-- chart-style.cssへのパス -->
   </head>
   <body>
     <div>固定文字列</div>
     <div>
-      {{ range .world}}
-      <div>
-        {{ .Date }}
-      </div>
-      <div>
-        {{ .MsciWorld}}
-      </div>
+      {{ range .totalMoney }}
+      <div>{{ . }}</div>
+      {{ end }}
+    </div>
+
+    <div class="chart-container">
+      <canvas id="myChart" class="canvas-chart"></canvas>
+    </div>
+
+    <script>
+        var labels = [];
+        var data = [];
+        {{ range $index, $_ := .totalMoney }}
+          labels.push("Year " + String({{$index}} + 1));
+          data.push({{ . }});
         {{ end }}
-    </div>
-    </div>
+
+
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Investment Growth',
+              data: data,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
   </body>
 </html>

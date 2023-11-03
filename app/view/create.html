@@ -6,6 +6,7 @@
   </head>
   <body>
     <form method="POST" action="/create" id="create_form">
+      <p>投資期間 <input type="number" name="commence_year" value="{{.investment_duration_year}}" />年</p>
       <p>初期投資額： <input type="number" name="initial_investment" value="{{.string_initial_investment}}" />万円</p>
       <p>毎月の積立額： <input type="number" name="monthly_amount" value="{{.string_monthly_amount}}" />万円</p>
       <p>積立年数： <input type="number" name="year" value="{{.string_accumulation_period}}" />年</p>
@@ -38,5 +39,6 @@
     <p>
       <a href="/"><input type="button" value="戻る" /></a>
     </p>
+    <script src="../js/script.js"></script>
   </body>
 </html>
