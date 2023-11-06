@@ -11,12 +11,13 @@ func GetRouter() *gin.Engine {
 	r.Static("../js", "./js")
 	r.GET("/show/:id", Show)
 	r.GET("/create", GetCreate)
-	r.POST("/create", PostCreate)
+	// r.POST("/create", PostCreate)
 
 	// TODO: データベースからレコードを取得できるか検証
 	r.GET("/get", GetStockData)
+	r.POST("/get/world", PostWorld)
 	r.GET("/get/world", GetWorld)
-	r.GET("/one/world", GetOneWorld)
+	// r.GET("/one/world", GetOneWorld)
 	// r.GET("/edit/:id", GetEdit)
 	// r.POST("/edit", PostEdit)
 	// r.GET("/delete/:id", GetDelete)

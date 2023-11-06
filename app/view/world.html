@@ -10,13 +10,35 @@
     <!-- chart-style.cssへのパス -->
   </head>
   <body>
-    <div>固定文字列</div>
+    <form method="POST" action="/get/world" id="create_form"></form>
+    <p>
+      投資対象：
+      <select name="stock">
+        <option value="sp_500">S&P500(米国)</option>
+        <option value="world_stock">全世界株式指数</option>
+      </select>
+    </p>
+    <p>
+      投資対象：
+      <select name="currency">
+        <option value="dollar">ドル</option>
+        <option value="yen">円</option>
+      </select>
+    </p>
+    <div>投資年数：42年9ヶ月</div>
+    <p>
+        <input type="submit" form="create_form" value="作成" />
+        <a href="/"><input type="button" value="戻る" /></a>
+      </p>
+    </form>
+    </body>
+
     <div>
       {{ range .totalMoney }}
       <div>{{ . }}</div>
       {{ end }}
     </div>
-
+å
     <div class="chart-container">
       <canvas id="myChart" class="canvas-chart"></canvas>
     </div>
@@ -25,7 +47,7 @@
         var labels = [];
         var data = [];
         {{ range $index, $_ := .totalMoney }}
-          labels.push("Year " + String({{$index}} + 1));
+          labels.push("Month " + String({{$index}} + 1));
           data.push({{ . }});
         {{ end }}
 
