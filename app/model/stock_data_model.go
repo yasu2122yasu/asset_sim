@@ -19,38 +19,43 @@ type StockData struct {
 }
 
 type World struct {
-	Id    int32   `gorm:"primaryKey"`
-	Date  string  `gorm:"column:date"`
-	Price float64 `gorm:"column:price"`
+	Id     int32   `gorm:"primaryKey"`
+	Date   string  `gorm:"column:date"`
+	Dollar float64 `gorm:"column:dollar"`
+	Yen    float64 `gorm:"column:yen"`
 }
 
-func GetAllStockData() (stock_datas []StockData) {
-	result := Db.First(&stock_datas)
+func GetAllStockData() []float64 {
+	var dollars []float64
+	var tel = "dollar"
+	result := Db.Model(&World{}).Pluck(tel, &dollars)
+	fmt.Println(result)
 	if result.Error != nil {
 		panic(result.Error)
 	}
-	return
+	return dollars
 }
 
-func GetOneStockData() (world []World) {
-	// stock_dataテーブルにあるPKであるid=2のレコードを取得する。
-	// result := Db.First(&world, 2) // 主キーを用いてレコードを検索
-	result := Db.Where("id BETWEEN ? AND ?", 1, 10).Find(&world)
+// func GetOneStockData(initial_year string) (world []World) {
+// 	// stock_dataテーブルにあるPKであるid=2のレコードを取得する。
+// 	// result := Db.First(&world, 2) // 主キーを用いてレコード検索
 
-	if result.Error != nil {
-		panic(result.Error)
-	}
+// 	result := Db.Where("date >= ?", initial_year).Order("date ASC").Limit(30).Find(&world)
 
-	return
-}
+// 	if result.Error != nil {
+// 		panic(result.Error)
+// 	}
 
-func GetAllWorld() (worlds []World) {
-	result := Db.Find(&worlds)
-	if result.Error != nil {
-		panic(result.Error)
-	}
-	return
-}
+// 	return
+// }
+
+// func GetAllWorld() (worlds []World) {
+// 	result := Db.Find(&worlds)
+// 	if result.Error != nil {
+// 		panic(result.Error)
+// 	}
+// 	return
+// }
 
 func GetAll() (books []Book) {
 	result := Db.Find(&books)
