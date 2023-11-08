@@ -1,6 +1,4 @@
-/* chart-style.cssとして保存する */
-
-.chart-container {
+chart-style.cssとして保存する .chart-container {
   width: 600px;
   margin: auto;
 }

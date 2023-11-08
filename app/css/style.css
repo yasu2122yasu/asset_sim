@@ -1,0 +1,179 @@
+/* Reset some basic elements */
+html,
+body,
+div,
+form,
+input,
+select,
+label,
+span,
+a,
+canvas {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Apply a natural box layout model to all elements */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Set base styles */
+body {
+  background-color: #f2f2f2;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1;
+  color: #333;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-container {
+  margin-bottom: 50px;
+}
+
+.form-box {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.form-select {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+.form-select:focus {
+  border-color: #999;
+}
+
+.form-info {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.info-text {
+  color: #666;
+}
+
+.info-number {
+  font-weight: bold;
+  color: #333;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #5cb85c;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #4cae4c;
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-button {
+  padding: 10px 15px;
+  background-color: #f4f4f4;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #e8e8e8;
+}
+
+.chart-container {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.canvas-chart {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-container {
+    margin-bottom: 30px;
+  }
+
+  .form-box {
+    padding: 15px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-select {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .submit-button,
+  .back-button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .form-label,
+  .form-info,
+  .info-number {
+    font-size: 14px;
+  }
+}
