@@ -2,6 +2,8 @@ package controller
 
 import (
 	"app/model"
+	"errors"
+	"fmt"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -80,28 +82,34 @@ func PostWorld(c *gin.Context) {
 	stock := c.PostForm("stock")
 	currency := c.PostForm("currency")
 
-	switch stock {
-	case "sp_500":
-		stock = "sp500s"
-	case "world_stock":
-		stock = "worlds"
+	// どの株価指数を利用するか判定するフラグを作成する。
+	var stockFlag string
+
+	fmt.Println(111)
+	fmt.Println(stock)
+	fmt.Println(currency)
+	fmt.Println(424)
+
+	if stock == "sp_500" && currency == "dollar" {
+		stockFlag = "sp500_dollar"
+	} else if stock == "sp_500" && currency == "yen" {
+		stockFlag = "sp500_yen"
+	} else if stock == "world_stock" && currency == "dollar" {
+		stockFlag = "world_dollar"
+	} else if stock == "world_stock" && currency == "yen" {
+		stockFlag = "world_yen"
+	} else {
+		errors.New("何らかのエラーが発生しました。入力値を変更してください。")
 	}
 
-	switch currency {
-	case "dollar":
-		currency = "dollar"
-	case "world_stock":
-		currency = "yen"
-	}
-
-	total := model.GetAllStockData()
+	total := model.GetAllStockData(stockFlag)
 
 	var sum float64
 	var totalMoney []int32
 
 	for _, v := range total {
-		// 何株あるかのカウント（oneは保有株数）
-		one := 10000 / v
+		// 何株購入するかのカウント（oneは保有株数）
+		one := 30000 / v
 
 		sum = sum + one
 

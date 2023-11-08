@@ -6,41 +6,45 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="chart-style.css" />
-    <!-- chart-style.cssへのパス -->
+    <link rel="stylesheet" type="text/css" href="../css/chart-style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
   </head>
   <body>
-    <form method="POST" action="/get/world" id="create_form"></form>
-    <p>
-      投資対象：
-      <select name="stock">
-        <option value="sp_500">S&P500(米国)</option>
-        <option value="world_stock">全世界株式指数</option>
-      </select>
-    </p>
-    <p>
-      投資対象：
-      <select name="currency">
-        <option value="dollar">ドル</option>
-        <option value="yen">円</option>
-      </select>
-    </p>
-    <div>投資年数：42年9ヶ月</div>
-    <p>
-        <input type="submit" form="create_form" value="作成" />
-        <a href="/"><input type="button" value="戻る" /></a>
-      </p>
-    </form>
-    </body>
+    <div class="container">
+      <div class="form-container">
+        <div class="form-box">
+          <form method="POST" action="/get/world" id="stock_form">
+            <div class="form-group">
+              <label for="stock" class="form-label">投資対象：</label>
+              <select id="stock" name="stock" class="form-select">
+                <option value="sp_500">S&P500(米国)</option>
+                <option value="world_stock">全世界株式指数</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="currency" class="form-label">通貨：</label>
+              <select id="currency" name="currency" class="form-select">
+                <option value="dollar">ドル</option>
+                <option value="yen">円</option>
+              </select>
+            </div>
+            <div class="form-info">
+              <span class="info-text">投資年数：</span>
+              <span class="info-number">42年9ヶ月</span>
+            </div>
+            <div>
+              <input type="submit" form="stock_form" value="作成" class="submit-button" />
+            </div>
+          </form>
 
-    <div>
-      {{ range .totalMoney }}
-      <div>{{ . }}</div>
-      {{ end }}
-    </div>
-å
-    <div class="chart-container">
-      <canvas id="myChart" class="canvas-chart"></canvas>
+          <div class="back-link">
+            <a href="/" class="back-button">戻る</a>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas id="myChart" class="canvas-chart"></canvas>
+        </div>
+      </div>
     </div>
 
     <script>

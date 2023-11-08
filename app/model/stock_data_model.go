@@ -18,22 +18,21 @@ type StockData struct {
 	Price int32
 }
 
-type World struct {
-	Id     int32   `gorm:"primaryKey"`
-	Date   string  `gorm:"column:date"`
-	Dollar float64 `gorm:"column:dollar"`
-	Yen    float64 `gorm:"column:yen"`
+type Stock struct {
+	Id          int32   `gorm:"primaryKey"`
+	Date        string  `gorm:"column:date"`
+	WorldDollar float64 `gorm:"column:world_dollar"`
+	WorldYen    float64 `gorm:"column:world_yen"`
+	Sp500Dollar float64 `gorm:"column:sp500_dollar"`
+	Sp500Yen    float64 `gorm:"column:sp500_yen"`
 }
 
-func GetAllStockData() []float64 {
-	var dollars []float64
-	var tel = "dollar"
-	result := Db.Model(&World{}).Pluck(tel, &dollars)
-	fmt.Println(result)
-	if result.Error != nil {
-		panic(result.Error)
-	}
-	return dollars
+func GetAllStockData(stock_flag string) []float64 {
+
+	var stock_flags []float64
+	Db.Model(&Stock{}).Select(stock_flag).Find(&stock_flags)
+
+	return stock_flags
 }
 
 // func GetOneStockData(initial_year string) (world []World) {

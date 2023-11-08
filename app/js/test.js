@@ -1,0 +1,3 @@
+function printHelloWorld() {
+  getComputedStyle();
+}
