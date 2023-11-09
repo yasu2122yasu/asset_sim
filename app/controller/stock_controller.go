@@ -81,14 +81,14 @@ func GetStockData(c *gin.Context) {
 func PostWorld(c *gin.Context) {
 	stock := c.PostForm("stock")
 	currency := c.PostForm("currency")
+	string_monthly_amount := c.PostForm(("monthly_amount"))
+
+	fmt.Println(string_monthly_amount)
+
+	float_monthly_amount, _ := strconv.ParseFloat(string_monthly_amount, 64)
 
 	// どの株価指数を利用するか判定するフラグを作成する。
 	var stockFlag string
-
-	fmt.Println(111)
-	fmt.Println(stock)
-	fmt.Println(currency)
-	fmt.Println(424)
 
 	if stock == "sp_500" && currency == "dollar" {
 		stockFlag = "sp500_dollar"
@@ -109,7 +109,7 @@ func PostWorld(c *gin.Context) {
 
 	for _, v := range total {
 		// 何株購入するかのカウント（oneは保有株数）
-		one := 30000 / v
+		one := float_monthly_amount / v
 
 		sum = sum + one
 
@@ -122,7 +122,8 @@ func PostWorld(c *gin.Context) {
 	}
 
 	c.HTML(200, "world.html", gin.H{
-		"totalMoney": totalMoney,
+		"string_monthly_amount": string_monthly_amount,
+		"totalMoney":            totalMoney,
 	})
 
 }
