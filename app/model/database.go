@@ -2,8 +2,11 @@ package model
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"time"
 
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -11,9 +14,19 @@ import (
 var Db *gorm.DB
 
 func init() {
-	dsn := "host=db port=5432 user=postgres password=password dbname=asset_sim sslmode=disable"
+	err := godotenv.Load() // 環境変数の読み込み
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	// dsn := "host=db port=5432 user=postgres password=password dbname=asset_sim sslmode=disable"
+	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_PORT"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_NAME"),
+	)
 	dialector := postgres.Open(dsn)
-	var err error
 	if Db, err = gorm.Open(dialector); err != nil {
 		connect(dialector, 100)
 	}

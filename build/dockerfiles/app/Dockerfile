@@ -10,6 +10,7 @@ RUN apk update \
 && apk add --no-cache git \
 && go get github.com/gin-gonic/gin \
 && go get github.com/jinzhu/gorm \
+&& go get github.com/joho/godotenv \
 && go get github.com/lib/pq \
 # ここ不安あるので後で確認する。
 && go mod init app \

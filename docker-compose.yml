@@ -23,14 +23,16 @@ services:
       context: .
       dockerfile: ./build/dockerfiles/db/Dockerfile
     environment:
-      - POSTGRES_DB=${DB_DATABASE_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      # - POSTGRES_DB=${DB_DATABASE_NAME}
+      # - POSTGRES_USER=${DB_USER}
+      # - POSTGRES_PASSWORD=${DB_PASSWORD}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
     volumes:
-      - db-store:/var/lib/postgresql/data
-      - ./app/database/init:/docker-entrypoint-initdb.d # DBの初期化
+      - ./postgresql/init:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
+    restart: always
 
 volumes:
   db-store:
