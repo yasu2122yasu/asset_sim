@@ -19,6 +19,7 @@ func init() {
 		log.Fatal("Error loading .env file")
 	}
 	// dsn := "host=db port=5432 user=postgres password=password dbname=asset_sim sslmode=disable"
+	// envファイルの位置を確認する
 	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("DB_HOST"),
 		os.Getenv("DB_PORT"),

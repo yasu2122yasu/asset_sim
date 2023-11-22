@@ -19,7 +19,7 @@ type StockData struct {
 }
 
 type Stock struct {
-	Id          int32   `gorm:"primaryKey"`
+	Id          int64   `gorm:"primaryKey"`
 	Date        string  `gorm:"column:date"`
 	WorldDollar float64 `gorm:"column:world_dollar"`
 	WorldYen    float64 `gorm:"column:world_yen"`
@@ -28,11 +28,15 @@ type Stock struct {
 }
 
 func GetAllStockData(stock_flag string) []float64 {
+	var results []float64
+	result := Db.Model(&Stock{}).Pluck(stock_flag, &results)
+	if result.Error != nil {
+		// エラー処理
+		fmt.Println("エラー:", result.Error)
+		return nil
+	}
 
-	var stock_flags []float64
-	Db.Model(&Stock{}).Select(stock_flag).Find(&stock_flags)
-
-	return stock_flags
+	return results
 }
 
 // func GetOneStockData(initial_year string) (world []World) {
